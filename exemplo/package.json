@@ -1,0 +1,10 @@
+{
+  "name": "sincronia-exemplo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "som": "node ferramentas/som.mjs",
+    "check": "npx --yes hyperframes@0.9.37 check",
+    "render": "npx --yes hyperframes@0.9.37 render . -o renders/exemplo.mp4 --fps 30"
+  }
+}

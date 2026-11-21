@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sincronia-em-codigo — Reloj único</title>
+<meta name="description" content="Reloj único: la imagen, el contador y el sonido de un video hecho con código leen la misma lista y caen en el mismo cuadro; sonido generado en código y serie cambiando una línea. Demo en HyperFrames.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/sincronia-em-codigo/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/sincronia-em-codigo/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/sincronia-em-codigo/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  .techhead{background:var(--bg2);border-top:3px solid var(--amb);padding:58px 0 8px}
+  .techhead h2{font-family:Sora;margin:.3em 0 0}
+  .techzone{background:var(--bg2)}
+  .quadros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.quadros{grid-template-columns:1fr 1fr}}
+  .quadros figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+  .quadros img{width:100%;display:block}
+  .quadros figcaption{padding:8px 10px;font-size:.82rem;color:var(--mut)}
+  table.t{width:100%;border-collapse:collapse;font-size:.92rem}
+  table.t th,table.t td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
+  table.t th{font-family:Sora;color:var(--amb);font-weight:600}
+  .aviso{border-left:3px solid var(--amb);background:var(--card);padding:14px 16px;border-radius:0 12px 12px 0;color:var(--mut);margin-top:18px}
+  @media(max-width:600px){table.t,table.t tbody,table.t tr,table.t td{display:block;width:100%} table.t tr:first-child{display:none} table.t tr{padding:10px 0;border-bottom:1px solid var(--line)} table.t td{border:none;padding:2px 0} table.t td code{overflow-wrap:normal;word-break:break-word}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">⏱️</span> sincronia-em-codigo</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#ideias">Las 3 ideas</a>
+    <a class="sec" href="#demo">La demo</a>
+    <a class="sec" href="#tecnico">Kit (técnico)</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/sincronia-em-codigo" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Reloj único · video hecho con código</span>
+      <h1>El sonido de tu video va a caer en el cuadro exacto de la imagen, sin ajustes a mano. Eso es lo que hace el <span class="amb">Reloj único</span>.</h1>
+      <p class="lead">Quien hace video con código (o le pide a la IA que lo haga) pierde horas cuadrando sonido, contador y animación, y cada episodio nuevo empieza desde cero. Aquí una sola lista lo controla todo, y el siguiente episodio sale cambiando una línea.</p>
+      <div class="cta">
+        <a class="btn" href="#ideias">Entender las 3 ideas</a>
+        <a class="btn ghost" href="https://github.com/inematds/sincronia-em-codigo" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-es.jpg" alt="Reloj único: imagen, número y sonido en el mismo cuadro"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">En resumen</span>
+  <p>En un video hecho con código, el problema más común es el desfase: el sonido llega un poco antes, el número en pantalla no coincide con la animación, y cada episodio nuevo obliga a tocar todo otra vez. Este kit junta tres ideas que lo resuelven: <strong>un reloj único</strong> (una lista de eventos con tiempo, que leen la imagen, el contador y el sonido), <strong>sonido hecho en código</strong> (golpes, crujidos y porrazos generados al momento, sin banco de efectos) y <strong>serie cambiando una línea</strong> (cada episodio es una copia de la plantilla en la que solo cambia un archivo). Incluye una demo lista en HyperFrames. Para usarlo: Node.js y ffmpeg.</p>
+  <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Una lista de tiempos controla imagen, contador y sonido; un episodio nuevo es cambiar una línea" loading="lazy" style="width:100%;display:block"></figure>
+</div></section>
+
+<section id="video"><div class="wrap">
+  <span class="chip">Video</span>
+  <h2>Entiéndelo en pocos minutos</h2>
+  <p class="sub">El video que explica el kit aparecerá aquí en cuanto se publique.</p>
+  <!-- VIDEO: entra o explicavideo do projeto quando publicado -->
+</div></section>
+
+<section id="ideias"><div class="wrap">
+  <span class="chip">Las 3 ideas</span>
+  <h2>Tres ideas que <span class="amb">te ahorran rehacer trabajo</span></h2>
+  <p class="sub">Cada una resuelve un problema que aparece en todo video hecho con código.</p>
+  <div class="grid g3">
+    <div class="card"><div class="num">1</div><h3>Reloj único</h3><p><strong>El problema:</strong> la animación tiene un tiempo, el contador tiene otro, el sonido se pegó después, y nada coincide.<br><strong>La idea:</strong> una sola lista de eventos ("a los 3,2 s ocurre el golpe 14"). Todo lo que se mueve le pregunta a esa lista. Cambias un tiempo y cambian los tres juntos.</p></div>
+    <div class="card"><div class="num">2</div><h3>Sonido hecho en código</h3><p><strong>El problema:</strong> buscar el efecto de sonido, descargarlo, cortarlo, alinearlo, y el mismo sonido repetido 100 veces cansa.<br><strong>La idea:</strong> generar cada sonido al momento (ruido + filtro + envolvente), con pequeñas variaciones, y poner cada uno en el tiempo del evento. Sin descargas y sin licencia de efectos.</p></div>
+    <div class="card"><div class="num">3</div><h3>Serie cambiando una línea</h3><p><strong>El problema:</strong> cada video nuevo se vuelve un proyecto nuevo, y el canal pierde la cara de serie.<br><strong>La idea:</strong> una plantilla fija y una hoja de cálculo. Cada línea se vuelve un episodio: copia la plantilla y reescribe solo el archivo del episodio. El estilo visual y el ritmo quedan iguales.</p></div>
+  </div>
+  <p class="aviso">Por qué "sin física en ejecución": si la animación depende de una simulación o de un sorteo sin semilla, cada render sale distinto y el sonido pierde su lugar. Aquí todo es función del tiempo y de una semilla, así que el mismo video sale idéntico cada vez, y cada episodio cambia solo la semilla. <a href="#guia">Cómo usarlo ↓</a></p>
+</div></section>
+
+<section id="demo"><div class="wrap">
+  <span class="chip">La demo</span>
+  <h2>100 golpes: el reloj único funcionando</h2>
+  <p class="sub">Cada golpe enciende una casilla de la cuadrícula en el mismo cuadro en que suena la madera. El tono sube con la cuenta y el sonido se mueve hacia el lado de la columna encendida. El contador y la barra leen la misma lista. (HyperFrames es una herramienta gratuita que convierte una página HTML en video, cuadro a cuadro: hace el papel de Remotion.)</p>
+  <div class="quadros">
+    <figure><img src="../assets/demo-0.jpg" alt="Demo al inicio: cuadrícula apagada y contador en cero" loading="lazy"><figcaption>0 s · cuadrícula apagada</figcaption></figure>
+    <figure><img src="../assets/demo-4.jpg" alt="Demo a los 4 segundos: 13 casillas encendidas y contador en 13" loading="lazy"><figcaption>4 s · 13 golpes, 13 casillas</figcaption></figure>
+    <figure><img src="../assets/demo-10.jpg" alt="Demo a los 10 segundos: 45 casillas encendidas y contador en 45" loading="lazy"><figcaption>10 s · el ritmo se acelera</figcaption></figure>
+    <figure><img src="../assets/demo-fim.jpg" alt="Demo al final: las 100 casillas encendidas y la frase final" loading="lazy"><figcaption>17 s · las 100 casillas y el cierre</figcaption></figure>
+  </div>
+  <p class="mut" style="margin-top:14px">Los episodios de ejemplo de la hoja de cálculo cambian el número de golpes, el color y la forma (25 círculos azules, 64 cuadrados verdes, 144 círculos rosas) sin tocar el código.</p>
+</div></section>
+
+<div id="tecnico" class="techhead"><div class="wrap">
+  <span class="chip">Parte técnica</span>
+  <h2>El kit: <span class="amb">para quien hace video con código</span></h2>
+  <p class="sub">De aquí para abajo es la parte técnica: los archivos, los comandos y cómo llevar las piezas a tu proyecto. <strong>No necesitas</strong> esta parte para entender lo de arriba.</p>
+</div></div>
+
+<div class="techzone">
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Dos bibliotecas pequeñas, una herramienta de serie y una demo</h2>
+  <p class="sub">JavaScript puro. El reloj funciona en el navegador y en Node, por eso la imagen y el sonido usan el mismo archivo.</p>
+  <table class="t">
+    <tr><th>Pieza</th><th>Qué hace</th></tr>
+    <tr><td><code>relogio/relogio.js</code></td><td><code>batidas()</code> crea N eventos entre dos tiempos con un ritmo (constante, acelera, frena); <code>relogio()</code> responde <code>contar(t)</code>, <code>ultimo(t)</code>, <code>proximo(t)</code>, <code>fase(t)</code>, <code>desde(t)</code>, <code>entre(a, b)</code>; <code>rng(semente)</code> es el sorteo repetible.</td></tr>
+    <tr><td><code>som/sintese.mjs</code></td><td>Sonidos: <code>batida</code> (madera), <code>fatia</code>, <code>estalo</code>, <code>baque</code>, <code>grao</code>, <code>molhado</code>, <code>plop</code>. <code>mixagem(duração).poe(som, t, dB, pan)</code> pone cada uno en su tiempo; <code>gravarWav</code> y <code>normalizar</code> (−15 LUFS, con ffmpeg).</td></tr>
+    <tr><td><code>serie/serie.mjs</code></td><td>Lee <code>episodios.csv</code>, copia la plantilla a <code>episodios/&lt;data&gt;-&lt;slug&gt;/</code> y escribe solo el <code>episodio.js</code>. Estados: <code>pendente</code> (pendiente) → <code>fazendo</code> (en proceso) → <code>pronto</code> (listo) → <code>aprovado</code> (aprobado) → <code>publicado</code>.</td></tr>
+    <tr><td><code>exemplo/</code></td><td>La demo "100 golpes" en HyperFrames: <code>js/linha.js</code> (la lista), <code>js/tela.js</code> (la imagen), <code>ferramentas/som.mjs</code> (el sonido), <code>episodio.js</code> (lo que cambia).</td></tr>
+    <tr><td><code>copiar-kit.mjs</code></td><td>Copia el reloj y el sonido a <code>&lt;seu projeto&gt;/kit/</code> (HyperFrames solo ve archivos dentro de la carpeta del proyecto).</td></tr>
+  </table>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Una lista, tres lectores</h2>
+  <p class="sub">La lista se arma una sola vez. La imagen pregunta "¿qué ya ocurrió en el tiempo t?" en cada cuadro; el sonido pregunta "¿cuándo ocurre cada evento?" una sola vez.</p>
+  <div class="flow">
+    <span>episodio.js</span><span class="arr">→</span>
+    <span>linha.js (la lista)</span><span class="arr">→</span>
+    <span>tela.js (imagen + contador)</span><span class="arr">+</span>
+    <span>som.mjs (un sonido por evento)</span><span class="arr">→</span>
+    <span>HyperFrames (MP4)</span>
+  </div>
+<pre style="margin-top:22px"><span class="c">// js/linha.js de la demo (versión simplificada): la única fuente de tiempo</span>
+<span class="k">import</span> { batidas, relogio } <span class="k">from</span> <span class="s">'../kit/relogio.js'</span>;
+<span class="k">export const</span> R = relogio([
+  ...batidas({ n: 100, de: 1.2, ate: 15.6, ritmo: <span class="s">'acelera'</span>, tipo: <span class="s">'batida'</span> }),
+  { t: 16.2, tipo: <span class="s">'fim'</span> },
+]);
+<span class="c">// en la imagen:  R.contar(t, 'batida')  →  el número del contador</span>
+<span class="c">// en el sonido:  for (const e of R.eventos) mix.poe(batida(s), e.t, 0)</span></pre>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requisitos previos</span>
+  <h2>Qué necesitas tener instalado</h2>
+  <p class="sub">Nada más. HyperFrames se usa con <code>npx</code>.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Node.js 22+ y git</h3><p>Ejecuta el reloj, el sonido, la serie y HyperFrames.</p><pre><span class="k">node</span> --version</pre></div>
+    <div class="card"><h3>ffmpeg</h3><p>Ajusta el volumen del sonido.</p><pre><span class="c"># Ubuntu</span>
+<span class="k">sudo apt install</span> ffmpeg
+<span class="c"># Mac</span>
+<span class="k">brew install</span> ffmpeg</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Correr la demo, hacer episodios y llevarlo a tu proyecto</h2>
+  <p class="sub">Comandos reales de este repositorio.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Descargar y correr la demo</h3>
+    <p>El sonido va primero (el video usa su archivo). La revisión tiene que terminar sin errores. El video dura 20 s, en 1080 × 1920.</p>
+<pre><span class="k">git clone</span> https://github.com/inematds/sincronia-em-codigo.git
+<span class="k">cd</span> sincronia-em-codigo/exemplo
+<span class="k">node</span> ferramentas/som.mjs
+<span class="k">npx</span> --yes hyperframes@0.9.37 check
+<span class="k">npx</span> --yes hyperframes@0.9.37 render . -o renders/exemplo.mp4 --fps 30</pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Hacer un episodio de la serie</h3>
+    <p>En la raíz del repositorio. Toma el siguiente <code>pendente</code> de <code>serie/episodios.csv</code>, copia la demo y escribe el <code>episodio.js</code> con los campos de la línea y una semilla nueva.</p>
+<pre><span class="k">cd</span> ..
+<span class="k">node</span> serie/serie.mjs                   <span class="c"># lista los episodios</span>
+<span class="c"># node serie/serie.mjs novo  → sin nombre: el siguiente pendiente</span>
+<span class="k">node</span> serie/serie.mjs novo 25-circulos  <span class="c"># o uno por nombre: crea episodios/&lt;data&gt;-25-circulos/</span>
+<span class="k">cd</span> episodios/*-25-circulos
+<span class="k">node</span> ferramentas/som.mjs
+<span class="k">npx</span> --yes hyperframes@0.9.37 render . -o renders/ep.mp4 --fps 30</pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Aprobar y marcar como publicado</h3>
+    <p>Los estados quedan en el CSV. Solo tú marcas <code>aprovado</code>.</p>
+<pre><span class="k">node</span> serie/serie.mjs status 25-circulos aprovado
+<span class="k">node</span> serie/serie.mjs status 25-circulos publicado</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Llevar el reloj y el sonido a tu proyecto</h3>
+    <p>Copia las dos piezas a <code>&lt;seu projeto&gt;/kit/</code>. Después, en tu código, crea la lista con <code>batidas()</code> y <code>relogio()</code>, dibuja a partir de <code>R.contar(t)</code> / <code>R.fase(t)</code> y genera el sonido leyendo <code>R.eventos</code>.</p>
+<pre><span class="k">node</span> copiar-kit.mjs ../meu-video   <span class="c"># la carpeta ../meu-video debe existir; crea kit/relogio.js y kit/sintese.mjs</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Usar la serie con tu plantilla</h3>
+    <p>En <code>serie/serie.config.json</code>, cambia <code>molde</code> por la carpeta de tu video y <code>arquivo</code>/<code>constante</code> por el nombre del archivo que cambia en cada episodio. Las columnas del CSV (menos <code>slug</code> y <code>status</code>) se vuelven los campos del episodio.</p>
+<pre>{ <span class="s">"molde"</span>: <span class="s">"exemplo"</span>, <span class="s">"destino"</span>: <span class="s">"episodios"</span>, <span class="s">"arquivo"</span>: <span class="s">"episodio.js"</span>, <span class="s">"constante"</span>: <span class="s">"EPISODIO"</span> }</pre>
+  </div></div>
+</div></section>
+
+<section id="testado"><div class="wrap">
+  <span class="chip">Qué se probó</span>
+  <h2>Revisado aquí</h2>
+  <p class="sub">Para que sepas qué esperar.</p>
+  <table class="t">
+    <tr><th>Parte</th><th>Situación</th></tr>
+    <tr><td>Sonido de la demo</td><td>Funcionó: 100 golpes y el cierre, en −15 LUFS.</td></tr>
+    <tr><td>Revisión de HyperFrames</td><td>Sin errores.</td></tr>
+    <tr><td>Fotos fijas de la demo</td><td>Sacadas del propio proyecto: son las imágenes de esta página.</td></tr>
+    <tr><td>Serie (<code>serie.mjs</code>)</td><td>Probada en una copia: episodio de 25 círculos creado, sonido generado, estado con error de escritura rechazado.</td></tr>
+    <tr><td>Render completo del MP4</td><td>No se ejecutó en esta versión: corre el paso 1 en tu máquina.</td></tr>
+  </table>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Próximos pasos</h2>
+  <p class="sub">El kit es pequeño a propósito.</p>
+  <div class="phase"><div class="tag">Ahora</div><div class="d"><strong>Reloj, sonido, serie y la demo</strong><span>Lo que está en este repositorio.</span></div></div>
+  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Más sonidos</strong><span>Nuevos timbres en <code>sintese.mjs</code> (siempre sonido de algo que ocurre en la escena, nunca "whoosh" de transición).</span></div></div>
+  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Ejemplo aplicado</strong><span>Un proyecto completo que usa las tres ideas: <a href="https://inematds.github.io/reel-asmr-cortes/guia/es/">reel-asmr-cortes</a>, la fábrica de reels ASMR.</span></div></div>
+</div></section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">JavaScript</div><div class="pill">HyperFrames</div><div class="pill">Node.js</div><div class="pill">ffmpeg</div>
+    <p style="margin-top:18px">sincronia-em-codigo · código abierto (MIT) ·
+      <a href="https://github.com/inematds/sincronia-em-codigo">inematds/sincronia-em-codigo</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='sincronia-em-codigo-theme'; // troque sincronia-em-codigo pelo nome do projeto
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

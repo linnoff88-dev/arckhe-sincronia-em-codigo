@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: Sora; src: url(fontes/Sora.ttf); font-weight: 100 900; }
+  @font-face { font-family: Montserrat; src: url(fontes/Montserrat-Black.ttf); font-weight: 900; }
+  @font-face { font-family: "JetBrains Mono"; src: url(fontes/JetBrainsMono-Bold.ttf); font-weight: 700; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0c0c10; color: #fff; }
+  #root { position: relative; width: 100%; height: 100%; }
+  #tela { position: absolute; inset: 0; z-index: 1; }
+  #topo { position: absolute; top: 170px; left: 0; right: 0; z-index: 2; text-align: center; }
+  #rotulo { font-family: "JetBrains Mono"; font-weight: 700; font-size: 30px; color: #0c0c10; background: #FACC15; display: inline-block; padding: 6px 14px; border-radius: 8px; }
+  #titulo { font-family: Sora; font-weight: 800; font-size: 64px; margin-top: 18px; }
+  #contador { font-family: Montserrat; font-weight: 900; font-size: 220px; line-height: 1; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  #trilho { position: absolute; left: 130px; right: 130px; top: 1520px; height: 14px; border-radius: 7px; background: #1b1b22; z-index: 2; }
+  #barra { height: 100%; width: 0; border-radius: 7px; background: #FACC15; }
+  #fim { position: absolute; left: 60px; right: 60px; top: 1600px; z-index: 2; text-align: center; opacity: 0; font-family: Sora; font-weight: 800; font-size: 50px; }
+  #fim small { display: block; font-size: 30px; font-weight: 600; color: rgba(255,255,255,.75); margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+  <canvas id="tela" width="1080" height="1920"></canvas>
+  <div id="topo">
+    <span id="rotulo">UM RELÓGIO SÓ</span>
+    <h1 id="titulo">100 batidas</h1>
+    <div id="contador">0</div>
+  </div>
+  <div id="trilho"><div id="barra"></div></div>
+  <div id="fim">Imagem, número e som no mesmo quadro<small>feito só com código · inema.club</small></div>
+  <audio id="som" class="clip" data-start="0" data-duration="20" data-track-index="10" data-volume="1" src="assets/som.wav"></audio>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.to({}, { duration: 20 }, 0);
+  window.__timelines = window.__timelines || {}; window.__timelines["main"] = tl;
+</script>
+<script type="module" src="js/tela.js"></script>
+</body>
+</html>

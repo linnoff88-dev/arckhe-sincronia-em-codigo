@@ -1,0 +1,8 @@
+{
+  "molde": "exemplo",
+  "destino": "episodios",
+  "arquivo": "episodio.js",
+  "constante": "EPISODIO",
+  "csv": "episodios.csv",
+  "ignorar": ["renders", "review", ".hyperframes", "node_modules", "assets"]
+}
