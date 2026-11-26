@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>sincronia-em-codigo — Reloj único</title>
 <meta name="description" content="Reloj único: la imagen, el contador y el sonido de un video hecho con código leen la misma lista y caen en el mismo cuadro; sonido generado en código y serie cambiando una línea. Demo en HyperFrames.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/sincronia-em-codigo/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/sincronia-em-codigo/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/sincronia-em-codigo/guia/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/arckhe-/guia/">
+<link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/arckhe-/guia/en/">
+<link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/arckhe-/guia/es/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -119,9 +119,9 @@
   <a class="brand" href="#top"><span class="emoji">⏱️</span> sincronia-em-codigo</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
     <a class="sec" href="#ideias">Las 3 ideas</a>
@@ -129,7 +129,7 @@
     <a class="sec" href="#tecnico">Kit (técnico)</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/sincronia-em-codigo" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/linnoff88-dev/sincronia-em-codigo" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -142,7 +142,7 @@
       <p class="lead">Quien hace video con código (o le pide a la IA que lo haga) pierde horas cuadrando sonido, contador y animación, y cada episodio nuevo empieza desde cero. Aquí una sola lista lo controla todo, y el siguiente episodio sale cambiando una línea.</p>
       <div class="cta">
         <a class="btn" href="#ideias">Entender las 3 ideas</a>
-        <a class="btn ghost" href="https://github.com/inematds/sincronia-em-codigo" target="_blank" rel="noopener">Ver en GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/sincronia-em-codigo" target="_blank" rel="noopener">Ver en GitHub</a>
       </div>
     </div>
     <figure><img src="../assets/banner-es.jpg" alt="Reloj único: imagen, número y sonido en el mismo cuadro"></figure>
@@ -250,7 +250,7 @@
   <div class="step"><div class="b">1</div><div>
     <h3>Descargar y correr la demo</h3>
     <p>El sonido va primero (el video usa su archivo). La revisión tiene que terminar sin errores. El video dura 20 s, en 1080 × 1920.</p>
-<pre><span class="k">git clone</span> https://github.com/inematds/sincronia-em-codigo.git
+<pre><span class="k">git clone</span> https://github.com/linnoff88-dev/sincronia-em-codigo.git
 <span class="k">cd</span> sincronia-em-codigo/exemplo
 <span class="k">node</span> ferramentas/som.mjs
 <span class="k">npx</span> --yes hyperframes@0.9.37 check
@@ -309,7 +309,7 @@
   <p class="sub">El kit es pequeño a propósito.</p>
   <div class="phase"><div class="tag">Ahora</div><div class="d"><strong>Reloj, sonido, serie y la demo</strong><span>Lo que está en este repositorio.</span></div></div>
   <div class="phase"><div class="tag">Después</div><div class="d"><strong>Más sonidos</strong><span>Nuevos timbres en <code>sintese.mjs</code> (siempre sonido de algo que ocurre en la escena, nunca "whoosh" de transición).</span></div></div>
-  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Ejemplo aplicado</strong><span>Un proyecto completo que usa las tres ideas: <a href="https://inematds.github.io/reel-asmr-cortes/guia/es/">reel-asmr-cortes</a>, la fábrica de reels ASMR.</span></div></div>
+  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Ejemplo aplicado</strong><span>Un proyecto completo que usa las tres ideas: <a href="https://linnoff88-dev.github.io/arckhe-/guia/es/">reel-asmr-cortes</a>, la fábrica de reels ASMR.</span></div></div>
 </div></section>
 </div>
 
@@ -317,8 +317,8 @@
   <div class="wrap">
     <div class="pill">JavaScript</div><div class="pill">HyperFrames</div><div class="pill">Node.js</div><div class="pill">ffmpeg</div>
     <p style="margin-top:18px">sincronia-em-codigo · código abierto (MIT) ·
-      <a href="https://github.com/inematds/sincronia-em-codigo">inematds/sincronia-em-codigo</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+      <a href="https://github.com/linnoff88-dev/sincronia-em-codigo">linnoff88-dev/sincronia-em-codigo</a> ·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 

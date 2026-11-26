@@ -1,6 +1,6 @@
 // Sons feitos em código: ruído + filtros + envelopes. Sem banco de efeitos, sem download.
 // Cada som é uma função (sorteio) => Float32Array. Chame com sorteios diferentes para ter variações.
-// Regra INEMA: nada de "whoosh" de movimento de tela; só som de coisa que acontece na cena.
+// Regra ARCKHÉ: nada de "whoosh" de movimento de tela; só som de coisa que acontece na cena.
 import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 

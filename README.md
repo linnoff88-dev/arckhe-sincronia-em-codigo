@@ -6,7 +6,7 @@
 </div>
 
 
-[![RelêÂ³gio êÂºnico](guia/assets/banner.jpg)](https://inematds.github.io/sincronia-em-codigo/guia/)
+[![RelêÂ³gio êÂºnico](guia/assets/banner.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/)
 
 **ê°Å¸â¡Â§ê°Å¸â¡Â· [PortuguêÂªs](README.md) êÂ· ê°Å¸â¡Âºê°Å¸â¡Â¸ [English](README.en.md) êÂ· ê°Å¸â¡Âªê°Å¸â¡Â¸ [EspaêÂ±ol](README.es.md)**
 
@@ -16,12 +16,12 @@ Em vêÂ­deo feito com cêÂ³digo, o problema mais comum êÂ© o descom
 
 ## ê°Å¸ââ Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/sincronia-em-codigo/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 ## ComeêÂ§ar
 
 ```bash
-git clone https://github.com/inematds/sincronia-em-codigo.git
+git clone https://github.com/linnoff88-dev/sincronia-em-codigo.git
 cd sincronia-em-codigo/exemplo
 node ferramentas/som.mjs
 npx --yes hyperframes@0.9.37 check
@@ -52,7 +52,7 @@ Levar para outro projeto: `node copiar-kit.mjs <pasta do projeto>`.
 | `exemplo/` | Demo "100 batidas" em HyperFrames |
 | `copiar-kit.mjs` | Copia relêÂ³gio e som para `<projeto>/kit/` |
 
-Exemplo aplicado das trêÂªs ideias: [reel-asmr-cortes](https://github.com/inematds/reel-asmr-cortes).
+Exemplo aplicado das trêÂªs ideias: [reel-asmr-cortes](https://github.com/linnoff88-dev/reel-asmr-cortes).
 
 LicenêÂ§a MIT. Fontes (OFL) com a licenêÂ§a em `exemplo/fontes/`.
 

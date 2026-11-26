@@ -1,6 +1,6 @@
 # sincronia-em-codigo — Reloj único
 
-[![Reloj único](guia/assets/banner-es.jpg)](https://inematds.github.io/sincronia-em-codigo/guia/es/)
+[![Reloj único](guia/assets/banner-es.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/es/)
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -10,12 +10,12 @@ En un video hecho con código, el problema más común es el desfase: el sonido 
 
 ## 📖 Guía de uso
 
-Guía completa (landing + paso a paso): **https://inematds.github.io/sincronia-em-codigo/guia/es/**
+Guía completa (landing + paso a paso): **https://linnoff88-dev.github.io/arckhe-/guia/es/**
 
 ## Empezar
 
 ```bash
-git clone https://github.com/inematds/sincronia-em-codigo.git
+git clone https://github.com/linnoff88-dev/sincronia-em-codigo.git
 cd sincronia-em-codigo/exemplo
 node ferramentas/som.mjs
 npx --yes hyperframes@0.9.37 check
@@ -46,6 +46,6 @@ Llevarlo a otro proyecto: `node copiar-kit.mjs <pasta do projeto>`.
 | `exemplo/` | Demo "100 golpes" en HyperFrames |
 | `copiar-kit.mjs` | Copia el reloj y el sonido a `<projeto>/kit/` |
 
-Ejemplo aplicado de las tres ideas: [reel-asmr-cortes](https://github.com/inematds/reel-asmr-cortes).
+Ejemplo aplicado de las tres ideas: [reel-asmr-cortes](https://github.com/linnoff88-dev/reel-asmr-cortes).
 
 Licencia MIT. Fuentes (OFL) con la licencia en `exemplo/fontes/`.

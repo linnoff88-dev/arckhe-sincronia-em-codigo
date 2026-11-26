@@ -1,6 +1,6 @@
 # sincronia-em-codigo — One clock
 
-[![One clock](guia/assets/banner-en.jpg)](https://inematds.github.io/sincronia-em-codigo/guia/en/)
+[![One clock](guia/assets/banner-en.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/en/)
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -10,12 +10,12 @@ In video made with code, the most common problem is things getting out of sync: 
 
 ## 📖 User guide
 
-Complete guide (landing page + step-by-step instructions): **https://inematds.github.io/sincronia-em-codigo/guia/en/**
+Complete guide (landing page + step-by-step instructions): **https://linnoff88-dev.github.io/arckhe-/guia/en/**
 
 ## Get started
 
 ```bash
-git clone https://github.com/inematds/sincronia-em-codigo.git
+git clone https://github.com/linnoff88-dev/sincronia-em-codigo.git
 cd sincronia-em-codigo/exemplo
 node ferramentas/som.mjs
 npx --yes hyperframes@0.9.37 check
@@ -46,6 +46,6 @@ Bring it to another project: `node copiar-kit.mjs <pasta do projeto>`.
 | `exemplo/` | "100 beats" demo in HyperFrames |
 | `copiar-kit.mjs` | Copies the clock and sound to `<projeto>/kit/` |
 
-Applied example of the three ideas: [reel-asmr-cortes](https://github.com/inematds/reel-asmr-cortes).
+Applied example of the three ideas: [reel-asmr-cortes](https://github.com/linnoff88-dev/reel-asmr-cortes).
 
 MIT License. Fonts (OFL) with the license in `exemplo/fontes/`.

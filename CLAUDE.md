@@ -2,7 +2,7 @@
 
 Kit Relógio único: `relogio/relogio.js` (lista de eventos), `som/sintese.mjs` (som em código), `serie/serie.mjs` (episódio por linha) e a demo `exemplo/` em HyperFrames.
 
-- Autor dos commits: `inematds <inematds@gmail.com>`. Push do `.github/workflows/` vai por SSH.
+- Autor dos commits: `linnoff88-dev <linnoff88-dev@gmail.com>`. Push do `.github/workflows/` vai por SSH.
 - `exemplo/kit/` é cópia de `relogio/` e `som/`: mudou a biblioteca, rodar `node copiar-kit.mjs exemplo` no mesmo commit.
 - Som só de coisa que acontece na cena; nada de "whoosh" de transiçêo.
 - Nada de `Math.random()` nem física rodando: tudo é funçêo de `t` e da semente.
