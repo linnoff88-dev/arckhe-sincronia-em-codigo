@@ -41,7 +41,7 @@ Bring it to another project: `node copiar-kit.mjs <pasta do projeto>`.
 | Part | What it does |
 |---|---|
 | `relogio/relogio.js` | The event list and time queries (`contar`, `fase`, `ultimo`, `proximo`, `desde`, `entre`) |
-| `som/sintese.mjs` | Sounds made with code (batida, fatia, estalo, baque, grão, molhado, plop), mixing, WAV, −15 LUFS |
+| `som/sintese.mjs` | Sounds made with code (batida, fatia, estalo, baque, grêo, molhado, plop), mixing, WAV, −15 LUFS |
 | `serie/serie.mjs` | Episode per CSV row, with status |
 | `exemplo/` | "100 beats" demo in HyperFrames |
 | `copiar-kit.mjs` | Copies the clock and sound to `<projeto>/kit/` |

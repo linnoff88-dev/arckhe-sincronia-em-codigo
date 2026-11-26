@@ -1,5 +1,5 @@
 // Relógio único: UMA lista de eventos com tempo. A imagem, o contador e o som leem esta lista,
-// então tudo cai no mesmo quadro sem ajuste à mão. Só dados: roda no navegador e no Node.
+// entêo tudo cai no mesmo quadro sem ajuste à mêo. Só dados: roda no navegador e no Node.
 //
 //   import { batidas, relogio } from './relogio.js';
 //   const R = relogio([
@@ -9,8 +9,8 @@
 //   R.contar(t, 'batida')   // quantas batidas já aconteceram no tempo t
 //   R.fase(t, 'batida')     // { ant, prox, k }: entre qual evento e qual, e quanto (0..1) já andou
 //
-// Regra: nada de física rodando nem Math.random(). Tudo é função do tempo t e de uma semente,
-// então o mesmo vídeo sai idêntico em todo render (e cada episódio muda só a semente).
+// Regra: nada de física rodando nem Math.random(). Tudo é funçêo do tempo t e de uma semente,
+// entêo o mesmo vídeo sai idêntico em todo render (e cada episódio muda só a semente).
 
 // aleatório com semente (mulberry32)
 export function rng(semente) {
@@ -33,7 +33,7 @@ export const RITMOS = {
 // n eventos do mesmo tipo entre dois tempos. `dados(i, sorteio)` acrescenta campos a cada um.
 export function batidas({ n, de, ate, ritmo = 'constante', tipo = 'batida', dados = null, semente = 1 }) {
   const f = typeof ritmo === 'function' ? ritmo : RITMOS[ritmo];
-  if (!f) throw new Error(`ritmo "${ritmo}" não existe (use ${Object.keys(RITMOS).join(', ')} ou uma função)`);
+  if (!f) throw new Error(`ritmo "${ritmo}" nêo existe (use ${Object.keys(RITMOS).join(', ')} ou uma funçêo)`);
   const s = rng(semente);
   return Array.from({ length: n }, (_, i) => ({
     t: de + (ate - de) * f(n === 1 ? 0 : i / (n - 1)), tipo, i, ...(dados ? dados(i, s) : {}),

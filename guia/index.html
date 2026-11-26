@@ -138,8 +138,8 @@
   <div class="wrap">
     <div>
       <span class="chip">Relógio único · vídeo feito com código</span>
-      <h1>O som do seu vídeo vai cair no quadro exato da imagem, sem ajuste à mão. É isso que o <span class="amb">Relógio único</span> faz.</h1>
-      <p class="lead">Quem faz vídeo com código (ou pede para a IA fazer) perde horas acertando som, contador e animação, e cada episódio novo começa do zero. Aqui uma lista só comanda tudo, e o próximo episódio sai trocando uma linha.</p>
+      <h1>O som do seu vídeo vai cair no quadro exato da imagem, sem ajuste à mêo. É isso que o <span class="amb">Relógio único</span> faz.</h1>
+      <p class="lead">Quem faz vídeo com código (ou pede para a IA fazer) perde horas acertando som, contador e animaçêo, e cada episódio novo começa do zero. Aqui uma lista só comanda tudo, e o próximo episódio sai trocando uma linha.</p>
       <div class="cta">
         <a class="btn" href="#ideias">Entender as 3 ideias</a>
         <a class="btn ghost" href="https://github.com/inematds/sincronia-em-codigo" target="_blank" rel="noopener">Ver no GitHub</a>
@@ -151,7 +151,7 @@
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">Em resumo</span>
-  <p>Em vídeo feito com código, o problema mais comum é o descompasso: o som chega um pouco antes, o número na tela não bate com a animação, e cada episódio novo exige mexer em tudo de novo. Este kit junta três ideias que resolvem isso: <strong>um relógio único</strong> (uma lista de eventos com tempo, que a imagem, o contador e o som leem), <strong>som feito em código</strong> (batidas, estalos e pancadas gerados na hora, sem banco de efeitos) e <strong>série trocando uma linha</strong> (cada episódio é uma cópia do molde em que só um arquivo muda). Vem com uma demo pronta em HyperFrames. Para usar: Node.js e ffmpeg.</p>
+  <p>Em vídeo feito com código, o problema mais comum é o descompasso: o som chega um pouco antes, o número na tela nêo bate com a animaçêo, e cada episódio novo exige mexer em tudo de novo. Este kit junta três ideias que resolvem isso: <strong>um relógio único</strong> (uma lista de eventos com tempo, que a imagem, o contador e o som leem), <strong>som feito em código</strong> (batidas, estalos e pancadas gerados na hora, sem banco de efeitos) e <strong>série trocando uma linha</strong> (cada episódio é uma cópia do molde em que só um arquivo muda). Vem com uma demo pronta em HyperFrames. Para usar: Node.js e ffmpeg.</p>
   <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="assets/banner-grade.jpg" alt="Uma lista de tempos comanda imagem, contador e som; episódio novo é trocar uma linha" loading="lazy" style="width:100%;display:block"></figure>
 </div></section>
 
@@ -167,11 +167,11 @@
   <h2>Três ideias que <span class="amb">economizam o retrabalho</span></h2>
   <p class="sub">Cada uma resolve um problema que aparece em todo vídeo feito com código.</p>
   <div class="grid g3">
-    <div class="card"><div class="num">1</div><h3>Relógio único</h3><p><strong>O problema:</strong> a animação tem um tempo, o contador tem outro, o som foi colado depois, e nada bate.<br><strong>A ideia:</strong> uma lista só de eventos ("aos 3,2 s acontece a batida 14"). Tudo o que se mexe pergunta a essa lista. Mudou um tempo, mudam os três juntos.</p></div>
+    <div class="card"><div class="num">1</div><h3>Relógio único</h3><p><strong>O problema:</strong> a animaçêo tem um tempo, o contador tem outro, o som foi colado depois, e nada bate.<br><strong>A ideia:</strong> uma lista só de eventos ("aos 3,2 s acontece a batida 14"). Tudo o que se mexe pergunta a essa lista. Mudou um tempo, mudam os três juntos.</p></div>
     <div class="card"><div class="num">2</div><h3>Som feito em código</h3><p><strong>O problema:</strong> procurar efeito sonoro, baixar, cortar, alinhar, e o mesmo som repetido 100 vezes cansa.<br><strong>A ideia:</strong> gerar cada som na hora (ruído + filtro + envelope), com pequenas variações, e colocar cada um no tempo do evento. Sem download e sem licença de efeito.</p></div>
     <div class="card"><div class="num">3</div><h3>Série trocando uma linha</h3><p><strong>O problema:</strong> cada vídeo novo vira um projeto novo, e o canal perde a cara de série.<br><strong>A ideia:</strong> um molde fixo e uma planilha. Cada linha vira um episódio: copia o molde e reescreve só o arquivo do episódio. O visual e o ritmo ficam iguais.</p></div>
   </div>
-  <p class="aviso">Por que "sem física rodando": se a animação depende de simulação ou de sorteio sem semente, cada render sai diferente e o som perde o lugar. Aqui tudo é função do tempo e de uma semente, então o mesmo vídeo sai idêntico toda vez, e cada episódio muda só a semente. <a href="#guia">Como usar ↓</a></p>
+  <p class="aviso">Por que "sem física rodando": se a animaçêo depende de simulaçêo ou de sorteio sem semente, cada render sai diferente e o som perde o lugar. Aqui tudo é funçêo do tempo e de uma semente, entêo o mesmo vídeo sai idêntico toda vez, e cada episódio muda só a semente. <a href="#guia">Como usar ↓</a></p>
 </div></section>
 
 <section id="demo"><div class="wrap">
@@ -190,7 +190,7 @@
 <div id="tecnico" class="techhead"><div class="wrap">
   <span class="chip">Parte técnica</span>
   <h2>O kit: <span class="amb">para quem faz vídeo com código</span></h2>
-  <p class="sub">Daqui para baixo é a parte técnica: os arquivos, os comandos e como levar as peças para o seu projeto. Você <strong>não precisa</strong> desta parte para entender o que está acima.</p>
+  <p class="sub">Daqui para baixo é a parte técnica: os arquivos, os comandos e como levar as peças para o seu projeto. Você <strong>nêo precisa</strong> desta parte para entender o que está acima.</p>
 </div></div>
 
 <div class="techzone">
@@ -201,7 +201,7 @@
   <table class="t">
     <tr><th>Peça</th><th>O que faz</th></tr>
     <tr><td><code>relogio/relogio.js</code></td><td><code>batidas()</code> cria N eventos entre dois tempos com ritmo (constante, acelera, freia); <code>relogio()</code> responde <code>contar(t)</code>, <code>ultimo(t)</code>, <code>proximo(t)</code>, <code>fase(t)</code>, <code>desde(t)</code>, <code>entre(a, b)</code>; <code>rng(semente)</code> é o sorteio repetível.</td></tr>
-    <tr><td><code>som/sintese.mjs</code></td><td>Sons: <code>batida</code> (madeira), <code>fatia</code>, <code>estalo</code>, <code>baque</code>, <code>grao</code>, <code>molhado</code>, <code>plop</code>. <code>mixagem(duração).poe(som, t, dB, pan)</code> coloca cada um no tempo; <code>gravarWav</code> e <code>normalizar</code> (−15 LUFS, pelo ffmpeg).</td></tr>
+    <tr><td><code>som/sintese.mjs</code></td><td>Sons: <code>batida</code> (madeira), <code>fatia</code>, <code>estalo</code>, <code>baque</code>, <code>grao</code>, <code>molhado</code>, <code>plop</code>. <code>mixagem(duraçêo).poe(som, t, dB, pan)</code> coloca cada um no tempo; <code>gravarWav</code> e <code>normalizar</code> (−15 LUFS, pelo ffmpeg).</td></tr>
     <tr><td><code>serie/serie.mjs</code></td><td>Lê <code>episodios.csv</code>, copia o molde para <code>episodios/&lt;data&gt;-&lt;slug&gt;/</code> e escreve só o <code>episodio.js</code>. Status: pendente → fazendo → pronto → aprovado → publicado.</td></tr>
     <tr><td><code>exemplo/</code></td><td>A demo "100 batidas" em HyperFrames: <code>js/linha.js</code> (a lista), <code>js/tela.js</code> (a imagem), <code>ferramentas/som.mjs</code> (o som), <code>episodio.js</code> (o que muda).</td></tr>
     <tr><td><code>copiar-kit.mjs</code></td><td>Copia o relógio e o som para <code>&lt;seu projeto&gt;/kit/</code> (o HyperFrames só enxerga arquivos dentro da pasta do projeto).</td></tr>
@@ -219,7 +219,7 @@
     <span>som.mjs (um som por evento)</span><span class="arr">→</span>
     <span>HyperFrames (MP4)</span>
   </div>
-<pre style="margin-top:22px"><span class="c">// js/linha.js da demo (versão simplificada): a única fonte de tempo</span>
+<pre style="margin-top:22px"><span class="c">// js/linha.js da demo (versêo simplificada): a única fonte de tempo</span>
 <span class="k">import</span> { batidas, relogio } <span class="k">from</span> <span class="s">'../kit/relogio.js'</span>;
 <span class="k">export const</span> R = relogio([
   ...batidas({ n: 100, de: 1.2, ate: 15.6, ritmo: <span class="s">'acelera'</span>, tipo: <span class="s">'batida'</span> }),
@@ -294,12 +294,12 @@
   <h2>Conferido aqui</h2>
   <p class="sub">Para você saber o que esperar.</p>
   <table class="t">
-    <tr><th>Parte</th><th>Situação</th></tr>
+    <tr><th>Parte</th><th>Situaçêo</th></tr>
     <tr><td>Som da demo</td><td>Rodou: 100 batidas e o fecho, em −15 LUFS.</td></tr>
     <tr><td>Conferência do HyperFrames</td><td>Sem erros.</td></tr>
-    <tr><td>Fotos paradas da demo</td><td>Tiradas do próprio projeto: são as imagens desta página.</td></tr>
-    <tr><td>Série (<code>serie.mjs</code>)</td><td>Testada numa cópia: episódio de 25 círculos criado, som gerado, status com erro de digitação recusado.</td></tr>
-    <tr><td>Render completo do MP4</td><td>Não rodado nesta versão: rode o passo 1 na sua máquina.</td></tr>
+    <tr><td>Fotos paradas da demo</td><td>Tiradas do próprio projeto: sêo as imagens desta página.</td></tr>
+    <tr><td>Série (<code>serie.mjs</code>)</td><td>Testada numa cópia: episódio de 25 círculos criado, som gerado, status com erro de digitaçêo recusado.</td></tr>
+    <tr><td>Render completo do MP4</td><td>Nêo rodado nesta versêo: rode o passo 1 na sua máquina.</td></tr>
   </table>
 </div></section>
 
@@ -308,7 +308,7 @@
   <h2>Próximos passos</h2>
   <p class="sub">O kit é pequeno de propósito.</p>
   <div class="phase"><div class="tag">Agora</div><div class="d"><strong>Relógio, som, série e a demo</strong><span>O que está neste repositório.</span></div></div>
-  <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Mais sons</strong><span>Novos timbres no <code>sintese.mjs</code> (sempre som de coisa que acontece na cena, nunca "whoosh" de transição).</span></div></div>
+  <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Mais sons</strong><span>Novos timbres no <code>sintese.mjs</code> (sempre som de coisa que acontece na cena, nunca "whoosh" de transiçêo).</span></div></div>
   <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Exemplo aplicado</strong><span>Um projeto completo que usa as três ideias: <a href="https://inematds.github.io/reel-asmr-cortes/guia/">reel-asmr-cortes</a>, a fábrica de reels ASMR.</span></div></div>
 </div></section>
 </div>
